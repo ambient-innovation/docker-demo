@@ -1,0 +1,14 @@
+# This is a very simple docker compose file that will start the server and mount the
+# relevant files file so it can be changed locally. 
+# Start with `docker-compose up` and then open http://localhost on your machine.
+
+version: '3.7'
+
+services:
+  nicolascage:
+    build: .
+    volumes:
+      - .:/srv/app
+    ports:
+      - "80:80"
+  
