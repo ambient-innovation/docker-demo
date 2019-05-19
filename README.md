@@ -1,4 +1,4 @@
-# nginx-demo
+# docker demo
 
 This is a simple demo project to demonstrate a Dockerfile and docker-compose
 in a simple environment. It launches an apache webserver and runs a custom php file inside. 
