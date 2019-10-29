@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cage-demo-deployment
+  namespace: felix
+  labels:
+    app: cage
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cage
+  template:
+    metadata:
+      labels:
+        app: cage
+    spec:
+      containers:
+      - name: cage
+        image: felixschul/cage-demo:v1.0.1
+        ports:
+        - containerPort: 80
