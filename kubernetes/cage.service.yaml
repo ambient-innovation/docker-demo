@@ -1,13 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: cage-deployment
+  name: cage-demo-service
   namespace: felix
 spec:
   selector:
     app: cage
-  type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 80
+    port: 8080
     targetPort: 80
+    name: http
