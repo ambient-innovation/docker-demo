@@ -62,7 +62,7 @@ jobs:
 
           # login to azure and get kubeconfig
           az login -u $AZ_LOGIN -p $AZ_PASS
-          az login --service-principal --username $AZ_USERNAME --password "$AZ_PASSWORD" --tenant AZ_TENANT
+          az login --service-principal --username $AZ_USERNAME --password "$AZ_PASSWORD" --tenant $AZ_TENANT
           
           kubectl -n felix patch deployment cage-demo-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"cage","image":"'$FULL_DOCKER_IMAGE_NAME'"}]}}}}'
 
