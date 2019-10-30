@@ -1,16 +1,3 @@
-## build
-# checkout code
-# docker build -t felixschul/cage-demo:master-1
-# docker login
-# docker push
-
-## deploy
-# az login
-# az aks get-credentials
-# kubectl apply mit geänderter yaml-Datei
-
-
-
 version: 2
 jobs:
   build:
