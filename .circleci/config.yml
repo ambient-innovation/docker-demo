@@ -1,0 +1,81 @@
+## build
+# checkout code
+# docker build -t felixschul/cage-demo:master-1
+# docker login
+# docker push
+
+## deploy
+# az login
+# az aks get-credentials
+# kubectl apply mit geänderter yaml-Datei
+
+
+
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: |
+          # set and store image tag
+          echo "felixschul/cage-demo:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM" > full_docker_image_name
+          FULL_DOCKER_IMAGE_NAME=$(cat full_docker_image_name)
+
+          # build the application image
+          docker build -t $FULL_DOCKER_IMAGE_NAME .
+
+          # push the image
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker push $FULL_DOCKER_IMAGE_NAME
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - full_docker_image_name
+
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run: |
+          # restore image name
+          FULL_DOCKER_IMAGE_NAME=$(cat workspace/full_docker_image_name)
+
+          # install kubectl
+          sudo apt-get update && sudo apt-get install -y apt-transport-https
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+          sudo apt-get update
+          sudo apt-get install -y kubectl
+
+          # install az-cli
+          sudo apt-get install apt-transport-https lsb-release software-properties-common dirmngr -y
+          AZ_REPO=$(lsb_release -cs)
+          echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+          sudo tee /etc/apt/sources.list.d/azure-cli.list
+          sudo apt-key --keyring /etc/apt/trusted.gpg.d/Microsoft.gpg adv \
+          --keyserver packages.microsoft.com \
+          --recv-keys BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          sudo apt-get update
+          sudo apt-get install azure-cli
+
+          # login to azure and get kubeconfig
+          az login -u $AZ_LOGIN -p $AZ_PASS
+          az aks get-credentials --resource-group Felix --name workshop
+
+          kubectl -n felix patch deployment cage-demo-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"cage","image":"'$FULL_DOCKER_IMAGE_NAME'"}]}}}}'
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
