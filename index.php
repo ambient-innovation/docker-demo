@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to the GFU Docker workshop! :D</title>
+    <title>Thanks for participating in the workshop! :)</title>
     <style>
         body {
             width: 35em;
