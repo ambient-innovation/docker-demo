@@ -12,6 +12,6 @@ This is a simple set of files to demonstrate running an application in an existi
 
 2. Create deployment: `kubectl apply -f cage.deployment.yaml`
 
-3. Create service: `kubectl apply -f cage.deployment.yaml`
+3. Create service: `kubectl apply -f cage.service.yaml`
 
 4. Check out service external address via Dashboard.
