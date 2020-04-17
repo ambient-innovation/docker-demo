@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Thanks for participating in the workshop! :)</title>
+    <title>Awesome demo with Nicolas Cage</title>
     <style>
         body {
             width: 35em;
@@ -14,7 +14,7 @@
 <h1>Let's launch docker!</h1>
 <img src="https://www.placecage.com/<?php echo $_GET['width'] ? $_GET['width'] : '400' ?>/400" />
 <p>
-    Hostname: <?php echo $_ENV['HOSTNAME'] ?>
+    Workload: <?php echo $_ENV['HOSTNAME'] ?>
 </p>
 <p>
     Width: <?php echo $_GET['width'] ?>
