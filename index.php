@@ -13,6 +13,8 @@
 <body>
 <h1>Let's launch docker!</h1>
 <img src="https://www.placecage.com/<?php echo $_GET['width'] ? $_GET['width'] : '400' ?>/400" />
+<p>We will now show Continuous Integration.</p>
+<p>This thing is automatically deployed :)</p>
 <p>
     Workload: <?php echo $_ENV['HOSTNAME'] ?>
 </p>

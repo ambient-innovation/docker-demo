@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: cage
-        image: felixschul/cage-demo:v1.0.1
+        image: felixschul/cage-demo:v1.2.0
         ports:
         - containerPort: 80

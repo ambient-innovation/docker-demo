@@ -49,9 +49,9 @@ jobs:
 
           # login to azure and get kubeconfig
           az login --service-principal --username $AZ_USERNAME --password "$AZ_PASSWORD" --tenant $AZ_TENANT
-          az aks get-credentials --resource-group felix-test --name felix-test
+          az aks get-credentials --resource-group felix-test --name workshop-cluster
 
-          kubectl -n felix patch deployment cage-demo-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"cage","image":"'$FULL_DOCKER_IMAGE_NAME'"}]}}}}'
+          kubectl -n felix patch deployment cage-demo-deployment -p '{"spec":{"template":{"spec":{"containers":[{"image":"'$FULL_DOCKER_IMAGE_NAME'"}]}}}}'
 
 workflows:
   version: 2
