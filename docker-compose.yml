@@ -11,4 +11,26 @@ services:
       - .:/var/www/html
     ports:
       - "80:80"
-  
+    environment: 
+      DB_HOST: db
+      DB_NAME: cage
+      DB_USER: cageuser
+      DB_PASSWORD: cagepassword
+    depends_on: 
+      - db
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports: 
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cage
+      MYSQL_USER: cageuser
+      MYSQL_PASSWORD: cagepassword
+
+volumes:
+    db_data: {}
