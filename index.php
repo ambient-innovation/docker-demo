@@ -30,5 +30,6 @@ $db->close();
 <h1>Nicolas Cage loves Docker ;)</h1>
 <img src="https://www.placecage.com/400/400" />
 <p>We have <?php echo $count; ?> visitors.</p>
+<p>Wenn ihr das seht, habt ihr den Workshop erfolgreich überstanden ;)</p>
 </body>
 </html>
