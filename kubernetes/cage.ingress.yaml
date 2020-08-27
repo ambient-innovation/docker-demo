@@ -7,10 +7,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: nicolascage.workshop.ambient-innovation.com
-    http:
+  - http:
       paths:
       - path: /
         backend:
           serviceName: cage-demo-service
-          servicePort: 8080
+          servicePort: 80
+    host: felix.workshop.ambient-innovation.com
