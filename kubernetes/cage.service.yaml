@@ -1,13 +1,14 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: cage-demo-service
   namespace: felix
 spec:
+  type: ClusterIP
   selector:
     app: cage
   ports:
   - protocol: TCP
-    port: 8080
+    port: 80
     targetPort: 80
     name: http
